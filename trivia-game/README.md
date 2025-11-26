@@ -13,6 +13,26 @@ TriviaGrid is a daily trivia challenge game where speed and knowledge combine. T
     *   **Game Over**: If you wait until only the answer remains, you score **0 points**.
 4.  **Max Score**: The perfect score is **90 points** (6 questions x 15 points).
 
+## Sharing
+
+After completing the daily challenge, you can share your results with friends. The share feature generates a visual summary of your performance:
+
+```
+TriviaGrid 11/26
+Score: 45/90
+
+🟦🟦🟦⬜⬜⬜
+🟪🟪⬜⬜⬜⬜
+🟨🟨🟨🟨⬜⬜
+🟧🟧⬜⬜⬜⬜
+🟩🟩🟩🟩🟩⬜
+🟥🟥🟥⬜⬜⬜
+```
+
+*   Each line represents a category.
+*   The number of colored blocks corresponds to your score in that category (scaled to 6 blocks).
+
+
 ## Tech Stack
 
 *   **Framework**: [React](https://react.dev/)
