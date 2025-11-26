@@ -220,6 +220,43 @@ export default function App() {
     }, 2000); // Slightly longer delay to see score
   };
 
+  const handleShare = async () => {
+    const dateStr = new Date().toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' });
+    let shareText = `TriviaGrid ${dateStr}\nScore: ${getTotalScore()}/90\n\n`;
+
+    // Map categories to emojis
+    const catEmojis = {
+      geo: '🟦',
+      ent: '🟪',
+      hist: '🟨',
+      art: '🟧',
+      sci: '🟩',
+      sport: '🟥'
+    };
+
+    ORDER.forEach(cat => {
+      const score = progress[cat] || 0;
+      // Calculate number of filled blocks: ceil((score / 15) * 6)
+      const numFilled = Math.ceil((score / 15) * 6);
+      const line = catEmojis[cat].repeat(numFilled) + '⬜'.repeat(6 - numFilled);
+      shareText += `${line}\n`;
+    });
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'TriviaGrid Result',
+          text: shareText,
+        });
+      } else {
+        await navigator.clipboard.writeText(shareText);
+        alert('Result copied to clipboard!');
+      }
+    } catch (err) {
+      console.error('Error sharing:', err);
+    }
+  };
+
   const getTotalScore = () => Object.values(progress).reduce((a, b) => a + b, 0);
   const getDiffColor = (l) => l <= 2 ? "bg-green-100 text-green-800" : l <= 5 ? "bg-yellow-100 text-yellow-800" : "bg-red-100 text-red-800";
 
@@ -310,9 +347,14 @@ export default function App() {
               );
             })}
           </div>
-          <button onClick={() => { localStorage.clear(); window.location.reload(); }} className="w-full bg-gray-100 text-gray-600 py-3 rounded-xl font-bold text-sm">
-            Play Again (Debug)
-          </button>
+          <div className="flex gap-3">
+            <button onClick={handleShare} className="flex-1 bg-black text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-transform">
+              <Share2 size={18} /> Share Result
+            </button>
+            <button onClick={() => { localStorage.clear(); window.location.reload(); }} className="px-4 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold text-sm">
+              Debug Reset
+            </button>
+          </div>
         </div>
       )}
 
