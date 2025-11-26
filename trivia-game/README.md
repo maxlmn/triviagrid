@@ -1,16 +1,41 @@
-# React + Vite
+# TriviaGrid
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TriviaGrid is a daily trivia challenge game where speed and knowledge combine. Test your knowledge across 6 categories: Geography, Entertainment, History, Art & Literature, Science, and Sports.
 
-Currently, two official plugins are available:
+## How to Play
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1.  **Daily Challenge**: A new set of 6 questions is generated every day based on the date.
+2.  **The Grid**: For each question, you are presented with a grid of 16 tiles (1 answer + 15 distractors).
+3.  **Beat the Clock**:
+    *   **0-3 Seconds**: All tiles are visible. Answering now gives you the maximum **15 points**.
+    *   **3+ Seconds**: Distractor tiles start disappearing one by one every second.
+    *   **Score Drop**: You lose 1 potential point for every second that passes after the initial 3 seconds.
+    *   **Game Over**: If you wait until only the answer remains, you score **0 points**.
+4.  **Max Score**: The perfect score is **90 points** (6 questions x 15 points).
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Framework**: [React](https://react.dev/)
+*   **Build Tool**: [Vite](https://vitejs.dev/)
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+*   **Icons**: [Lucide React](https://lucide.dev/)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  Clone the repository.
+2.  Install dependencies:
+    ```bash
+    cd trivia-game
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open `http://localhost:5173` in your browser.
+
+## Project Structure
+
+*   `src/App.jsx`: Main game logic, timer, and UI.
+*   `src/questions.json`: The database of trivia questions.
+*   `src/index.css`: Tailwind directives and global styles.
