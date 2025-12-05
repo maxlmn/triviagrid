@@ -5,7 +5,7 @@ import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # --- CONFIGURATION ---
-API_KEY = 'YOUR_API_KEY_HERE' # <--- PASTE YOUR KEY HERE
+API_KEY = 'AIzaSyAGdEkCClIgv8Uci_XiflAcTYJ2aKvh3a4' # <--- PASTE YOUR KEY HERE
 OUTPUT_FILE = "questions.json"
 SETS_TO_GENERATE = 5  # Start small to test, then increase to 1000
 
@@ -14,7 +14,7 @@ genai.configure(api_key=API_KEY)
 
 # We use Flash because it's fast and efficient for data generation
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="gemini-2.0-flash",
     generation_config={
         "temperature": 0.9,
         "response_mime_type": "application/json", # Forces JSON output
@@ -43,6 +43,7 @@ def generate_trivia_set(difficulty):
     3. The "q" (question) must be a complete, well-formed sentence.
     4. Do not duplicate common trivia. Try to find unique facts for level {difficulty}.
     5. Output must be a valid JSON Array containing exactly 6 objects.
+    6. "distractors" must contain exactly 15 incorrect but plausible answers.
 
     JSON Schema per object:
     {{
@@ -50,7 +51,8 @@ def generate_trivia_set(difficulty):
       "diff": {difficulty},
       "type": "city",
       "q": "Question text here?",
-      "a": "Answer"
+      "a": "Answer",
+      "distractors": ["Wrong1", "Wrong2", "...", "Wrong15"]
     }}
     """
 
